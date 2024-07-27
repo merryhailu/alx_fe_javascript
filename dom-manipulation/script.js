@@ -8,7 +8,7 @@ let quotes = [
     // Add more quotes here
 ];
 
-function showRandomQuote() {
+function displayRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
     quoteDisplay.textContent = `"${randomQuote.text}" 
@@ -24,10 +24,10 @@ function addQuote() {
         quotes.push(newQuote);
         newQuoteText.value = '';
         newQuoteCategory.value = '';
-        showRandomQuote();
+        displayRandomQuote();
     }
 }
 
-newQuoteButton.addEventListener('click', showRandomQuote);
+newQuoteButton.addEventListener('click', displayRandomQuote);
 
-showRandomQuote(); // Display initial quote
+displayRandomQuote(); // Display initial quote
