@@ -21,7 +21,7 @@ if (storedCategory) {
     selectedCategory = storedCategory;
 };
 
-function showRandomQuote(category = selectedCategory) {
+async function showRandomQuote(category = selectedCategory) {
     const filteredQuotes = category === 'all' ? quotes : quotes.filter(quote => quote.category === category);
     if (filteredQuotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
@@ -40,7 +40,7 @@ function showRandomQuote(category = selectedCategory) {
 //  - ${randomQuote.author}`;
 // };
 
-function addQuote() {
+async function addQuote() {
     const quoteText = newQuoteText.value.trim();
     const quoteCategory = newQuoteCategory.value.trim();
 
@@ -52,7 +52,7 @@ function addQuote() {
         saveQuotes();
         showRandomQuote(selectedCategory);
         populateCategories();
-        syncQuotesToServer();
+        await syncQuotesToServer();
 
     };
 };
@@ -112,7 +112,7 @@ function createAddQuoteForm() {
 
 };
 
-function syncQuotesToServer() {
+async function syncQuotesToServer() {
     fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -130,7 +130,7 @@ function syncQuotesToServer() {
         });
 };
 
-function fetchQuotesFromServer() {
+async function fetchQuotesFromServer() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
