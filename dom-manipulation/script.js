@@ -48,13 +48,13 @@ function addQuote() {
         newQuoteText.value = '';
         newQuoteCategory.value = '';
         saveQuotes();
-        showRandomQuote();
-        updateCategories();
+        showRandomQuote(currentCategory);
+        populateCategories();
 
     };
 };
 
-function updateCategories() {
+function populateCategories() {
     const categories = new Set(quotes.map(quote => quote.category));
     categoryFilter.innerHTML = '';
     categoryFilter.appendChild(new Option('All Categories', 'all'));
@@ -114,4 +114,4 @@ newQuoteButton.addEventListener('click', showRandomQuote);
 showRandomQuote(currentCategory); // Display initial quote
 
 importFile.addEventListener('change', importFromJsonFile);
-updateCategories();
+populateCategories();
