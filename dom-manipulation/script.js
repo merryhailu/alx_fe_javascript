@@ -2,6 +2,7 @@ const quoteDisplay = document.getElementById('quoteDisplay');
 const newQuoteButton = document.getElementById('newQuote');
 const newQuoteText = document.getElementById('newQuoteText');
 const newQuoteCategory = document.getElementById('newQuoteCategory');
+const addQuoteForm = document.getElementById('addQuoteForm');
 
 let quotes = [
     { text: 'The only way to do great work is to love what you do.', author: 'Steve Jobs', category: 'inspiration' },
