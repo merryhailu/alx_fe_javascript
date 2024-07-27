@@ -30,6 +30,9 @@ function addQuote() {
 };
 
 function createAddQuoteForm() {
+    const listItem = document.createElement('li');
+    listItem.textContent = quoteText;
+    addQuoteForm.appendChild(listItem);
 
 };
 
