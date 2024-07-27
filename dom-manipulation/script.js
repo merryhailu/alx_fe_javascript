@@ -8,10 +8,10 @@ let quotes = [
     // Add more quotes here
 ];
 
-function displayRandomQuote() {
+function showRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
-    quoteDisplay.textContent = `"${randomQuote.text}" 
+    quoteDisplay.innerHTML = `"${randomQuote.text}" 
  - ${randomQuote.author}`;
 }
 
@@ -24,10 +24,10 @@ function addQuote() {
         quotes.push(newQuote);
         newQuoteText.value = '';
         newQuoteCategory.value = '';
-        displayRandomQuote();
+        showRandomQuote();
     }
 }
 
-newQuoteButton.addEventListener('click', displayRandomQuote);
+newQuoteButton.addEventListener('click', showRandomQuote);
 
-displayRandomQuote(); // Display initial quote
+showRandomQuote(); // Display initial quote
