@@ -13,7 +13,7 @@ function showRandomQuote() {
     const randomQuote = quotes[randomIndex];
     quoteDisplay.innerHTML = `"${randomQuote.text}" 
  - ${randomQuote.author}`;
-}
+};
 
 function addQuote() {
     const quoteText = newQuoteText.value.trim();
@@ -26,7 +26,7 @@ function addQuote() {
         newQuoteCategory.value = '';
         showRandomQuote();
     }
-}
+};
 
 newQuoteButton.addEventListener('click', showRandomQuote);
 
