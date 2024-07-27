@@ -29,6 +29,10 @@ function addQuote() {
     }
 };
 
+function createAddQuoteForm() {
+
+};
+
 newQuoteButton.addEventListener('click', showRandomQuote);
 
 showRandomQuote(); // Display initial quote
