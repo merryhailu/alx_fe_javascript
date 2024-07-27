@@ -113,22 +113,21 @@ function createAddQuoteForm() {
 };
 
 async function syncQuotesToServer() {
-    fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(quotes)
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Handle successful sync
-            console.log('Quotes synced to server');
-        })
-        .catch(error => {
-            console.error('Error syncing quotes:', error);
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quotes)
         });
+        const data = await response.json();
+        console.log("Quotes synced with server!");
+    } catch (error) {
+        console.error("Error syncing quotes:", error);
+    }
 };
+
 
 async function fetchQuotesFromServer() {
     fetch(apiUrl)
