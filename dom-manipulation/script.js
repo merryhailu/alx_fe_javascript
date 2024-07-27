@@ -9,6 +9,8 @@ const categoryFilter = document.getElementById('categoryFilter');
 let quotes = [];
 let selectedCategory = 'all';
 
+const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
 // Load quotes from local storage (if available)
 const storedQuotes = localStorage.getItem('quotes');
 if (storedQuotes) {
@@ -19,7 +21,7 @@ if (storedCategory) {
     selectedCategory = storedCategory;
 };
 
-function showRandomQuote(category) {
+function showRandomQuote(category = selectedCategory) {
     const filteredQuotes = category === 'all' ? quotes : quotes.filter(quote => quote.category === category);
     if (filteredQuotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
@@ -29,7 +31,7 @@ function showRandomQuote(category) {
     } else {
         quoteDisplay.textContent = 'No quotes found for this category.';
     };
-}
+};
 
 // function showRandomQuote() {
 //     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -50,6 +52,7 @@ function addQuote() {
         saveQuotes();
         showRandomQuote(selectedCategory);
         populateCategories();
+        syncQuotesToServer();
 
     };
 };
@@ -108,6 +111,45 @@ function createAddQuoteForm() {
     addQuoteForm.appendChild(listItem);
 
 };
+
+function syncQuotesToServer() {
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(quotes)
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle successful sync
+            console.log('Quotes synced to server');
+        })
+        .catch(error => {
+            console.error('Error syncing quotes:', error);
+        });
+};
+
+function fetchQuotesFromServer() {
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Handle received quotes
+            quotes = data;
+            saveQuotes();
+            populateCategories();
+            showRandomQuote();
+        })
+        .catch(error => {
+            console.error('Error fetching quotes:', error);
+        });
+};
+
+// Initial sync
+fetchQuotesFromServer();
+// Periodic sync (adjust interval as needed)
+setInterval(fetchQuotesFromServer, 60000);
+
 
 newQuoteButton.addEventListener('click', showRandomQuote);
 
